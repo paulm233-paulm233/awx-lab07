@@ -1,0 +1,15 @@
+---
+- name: Retrieve Cisco Router Interfaces
+  hosts: all
+  gather_facts: false
+
+  tasks:
+    - name: Retrieve interface information
+      ios_command:
+        commands:
+          - show ip interface brief
+      register: interface_result
+
+    - name: Display interface information
+      debug:
+        var: interface_result.stdout_lines[0]
